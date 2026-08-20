@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — SPPG Kamulan 2</title>
+  <link rel="icon" type="image/webp" href="/images/LogoBGN.svg.webp" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+
+<body>
+
+  <!-- ── SIDEBAR ─────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="/images/LogoBGN.svg.webp" alt="Logo Badan Gizi Nasional" style="width: 44px; height: 44px; object-fit: contain; flex-shrink: 0;" />
+      <div>
+        <div class="sidebar-title">SPPG Kamulan 2</div>
+        <div class="sidebar-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard" onclick="showPage('dashboard',this)">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" data-page="tambah" onclick="showPage('tambah',this)">
+        <span class="nav-icon">➕</span> Tambah / Edit Menu
+      </a>
+      <a href="#" class="nav-item" data-page="riwayat" onclick="showPage('riwayat',this)">
+        <span class="nav-icon">📅</span> Riwayat Menu
+      </a>
+      <a href="#" class="nav-item" data-page="statistik" onclick="showPage('statistik',this)">
+        <span class="nav-icon">🏆</span> Statistik Program
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" class="sidebar-link">🌐 Lihat Website</a>
+      <button class="btn-logout" onclick="doLogout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <!-- ── MOBILE TOPBAR ───────────────────────────────────────────────── -->
+  <div class="topbar">
+    <button class="topbar-burger" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+    <span class="topbar-title">Admin Panel — SPPG Kamulan 2</span>
+    <button class="topbar-logout" onclick="doLogout()">🚪</button>
+  </div>
+
+  <!-- ── MAIN ───────────────────────────────────────────────────────── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ── PAGE: DASHBOARD ──────────────────────────────────────────── -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h1 class="page-title">📊 Dashboard</h1>
+        <p class="page-sub" id="dashDateSub">Memuat…</p>
+      </div>
+
+      <!-- Menu Aktif Hari Ini -->
+      <div class="card" id="dashTodayCard">
+        <div class="card-header">
+          <h2 class="card-title">🍱 Menu Aktif Hari Ini</h2>
+          <button class="btn btn-sm btn-primary"
+            onclick="showPage('tambah', document.querySelector('[data-page=tambah]')); loadTodayForEdit()">✏️ Edit
+            Menu</button>
+        </div>
+        <div id="dashTodayContent">
+          <div class="skeleton-block"></div>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="stats-row" id="dashStats">
+        <div class="stat-mini skeleton-block" style="height:90px;"></div>
+        <div class="stat-mini skeleton-block" style="height:90px;"></div>
+        <div class="stat-mini skeleton-block" style="height:90px;"></div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: TAMBAH / EDIT MENU ─────────────────────────────────── -->
+    <div class="page" id="page-tambah">
+      <div class="page-header">
+        <h1 class="page-title">➕ Tambah / Edit Menu</h1>
+        <p class="page-sub">Isi form di bawah untuk menambahkan atau mengubah menu harian</p>
+      </div>
+
+      <form id="menuForm" onsubmit="submitMenu(event)" novalidate>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📋 Informasi Umum</h2>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="fTanggal">📅 Tanggal Sajian <span class="req">*</span></label>
+              <input type="date" id="fTanggal" required />
+            </div>
+            <div class="form-group">
+              <label for="fAlergen">⚠️ Info Alergen</label>
+              <input type="text" id="fAlergen" placeholder="Contoh: Mengandung susu sapi…" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fCatatan">📝 Catatan Tambahan (opsional)</label>
+            <textarea id="fCatatan" rows="2" placeholder="Catatan khusus untuk menu ini…"></textarea>
+          </div>
+        </div>
+
+
+        <!-- Item Menu -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">🍽️ Item Menu</h2>
+            <button type="button" class="btn btn-sm btn-outline" onclick="addMenuItem()">+ Tambah Item</button>
+          </div>
+          <div id="menuItemList">
+            <!-- diisi JS -->
+          </div>
+        </div>
+
+        <!-- Nilai Gizi -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📊 Nilai Gizi per Porsi</h2>
+          </div>
+          <div class="gizi-tabs">
+            <button type="button" class="gizi-tab-btn active" onclick="switchGiziTab('Balita')">Balita</button>
+            <button type="button" class="gizi-tab-btn" onclick="switchGiziTab('Kecil')">Kecil</button>
+            <button type="button" class="gizi-tab-btn" onclick="switchGiziTab('Besar')">Besar</button>
+            <button type="button" class="gizi-tab-btn" onclick="switchGiziTab('Bumil')">Bumil & Busui</button>
+          </div>
+          
+          <div id="gizi-tab-Balita" class="gizi-tab-content active">
+            <div class="gizi-form-grid">
+              <div class="form-group"><label>⚡ Energi (kkal)</label><input type="number" id="gEnergi_Balita" min="0" step="1" placeholder="0" /></div>
+              <div class="form-group"><label>💪 Protein (g)</label><input type="number" id="gProtein_Balita" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🌾 Karbohidrat (g)</label><input type="number" id="gKarbo_Balita" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥑 Lemak (g)</label><input type="number" id="gLemak_Balita" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥦 Serat (g)</label><input type="number" id="gSerat_Balita" min="0" step="0.1" placeholder="0" /></div>
+            </div>
+          </div>
+
+          <div id="gizi-tab-Kecil" class="gizi-tab-content">
+            <div class="gizi-form-grid">
+              <div class="form-group"><label>⚡ Energi (kkal)</label><input type="number" id="gEnergi_Kecil" min="0" step="1" placeholder="0" /></div>
+              <div class="form-group"><label>💪 Protein (g)</label><input type="number" id="gProtein_Kecil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🌾 Karbohidrat (g)</label><input type="number" id="gKarbo_Kecil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥑 Lemak (g)</label><input type="number" id="gLemak_Kecil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥦 Serat (g)</label><input type="number" id="gSerat_Kecil" min="0" step="0.1" placeholder="0" /></div>
+            </div>
+          </div>
+
+          <div id="gizi-tab-Besar" class="gizi-tab-content">
+            <div class="gizi-form-grid">
+              <div class="form-group"><label>⚡ Energi (kkal)</label><input type="number" id="gEnergi_Besar" min="0" step="1" placeholder="0" /></div>
+              <div class="form-group"><label>💪 Protein (g)</label><input type="number" id="gProtein_Besar" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🌾 Karbohidrat (g)</label><input type="number" id="gKarbo_Besar" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥑 Lemak (g)</label><input type="number" id="gLemak_Besar" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥦 Serat (g)</label><input type="number" id="gSerat_Besar" min="0" step="0.1" placeholder="0" /></div>
+            </div>
+          </div>
+
+          <div id="gizi-tab-Bumil" class="gizi-tab-content">
+            <div class="gizi-form-grid">
+              <div class="form-group"><label>⚡ Energi (kkal)</label><input type="number" id="gEnergi_Bumil" min="0" step="1" placeholder="0" /></div>
+              <div class="form-group"><label>💪 Protein (g)</label><input type="number" id="gProtein_Bumil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🌾 Karbohidrat (g)</label><input type="number" id="gKarbo_Bumil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥑 Lemak (g)</label><input type="number" id="gLemak_Bumil" min="0" step="0.1" placeholder="0" /></div>
+              <div class="form-group"><label>🥦 Serat (g)</label><input type="number" id="gSerat_Bumil" min="0" step="0.1" placeholder="0" /></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="resetForm()">🔄 Reset Form</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span class="btn-text">💾 Simpan Menu</span>
+            <span class="btn-spinner" style="display:none">⏳</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ── PAGE: RIWAYAT ────────────────────────────────────────────── -->
+    <div class="page" id="page-riwayat">
+      <div class="page-header">
+        <h1 class="page-title">📅 Riwayat Menu</h1>
+        <p class="page-sub">30 menu terakhir yang telah disimpan</p>
+      </div>
+      <div class="card" style="padding:0; overflow:hidden;">
+        <table class="data-table" id="riwayatTable">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Menu</th>
+              <th>Energi</th>
+              <th>Alergen</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="riwayatBody">
+            <tr>
+              <td colspan="5" class="table-loading">Memuat data…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── PAGE: STATISTIK ──────────────────────────────────────────── -->
+    <div class="page" id="page-statistik">
+      <div class="page-header">
+        <h1 class="page-title">🏆 Statistik Program</h1>
+        <p class="page-sub">Angka yang ditampilkan di website publik</p>
+      </div>
+      <div class="card">
+        <div id="statsForm">
+          <div class="skeleton-block" style="height:60px; margin-bottom:1rem;"></div>
+          <div class="skeleton-block" style="height:60px; margin-bottom:1rem;"></div>
+          <div class="skeleton-block" style="height:60px;"></div>
+        </div>
+        <div class="form-actions" style="margin-top:1.5rem;">
+          <button class="btn btn-primary" onclick="saveStatistik()">💾 Simpan Statistik</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="/admin/admin.js"></script>
+</body>
+
+</html>

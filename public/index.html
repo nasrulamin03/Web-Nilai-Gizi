@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Website informasi menu harian dan nilai gizi program Makan Bergizi Gratis (MBG) SPPG Blitar Talun Kamulan 2. Transparansi gizi untuk siswa, orang tua, dan evaluator." />
+    <meta property="og:title" content="SPPG Blitar Talun Kamulan 2 — Informasi Gizi MBG" />
+    <meta property="og:description"
+        content="Menu harian dan nilai gizi program Makan Bergizi Gratis. Menyajikan Gizi, Membangun Generasi." />
+    <title>SPPG Blitar Talun Kamulan 2 — Informasi Gizi MBG</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/webp" href="images/LogoBGN.svg.webp" />
+</head>
+
+<body>
+
+    <!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="navbar-inner">
+                <a href="#hero" class="nav-brand" aria-label="SPPG Kamulan 2 - Beranda">
+                    <img src="images/LogoBGN.svg.webp" alt="Logo Badan Gizi Nasional"
+                        style="width: 42px; height: 42px; object-fit: contain; flex-shrink: 0;" />
+                    <div class="nav-brand-text">
+                        <span class="nav-brand-title">SPPG Blitar Talun Kamulan 2</span>
+                        <span class="nav-brand-sub">Badan Gizi Nasional</span>
+                    </div>
+                </a>
+
+                <ul class="nav-links" role="navigation" aria-label="Navigasi utama">
+                    <li><a href="#hero" id="nav-beranda" class="active">Beranda</a></li>
+                    <li><a href="#menu" id="nav-menu">Menu Hari Ini</a></li>
+                    <li><a href="#gizi" id="nav-gizi">Nilai Gizi</a></li>
+                    <li><a href="#riwayat" id="nav-riwayat">Riwayat</a></li>
+                    <li><a href="#tentang" id="nav-tentang">Tentang</a></li>
+                    <li><a href="#footer" id="nav-kontak">Kontak</a></li>
+                </ul>
+
+                <a href="#menu" class="btn btn-primary" style="display: none;" id="navCtaDesktop">Lihat Menu Hari
+                    Ini</a>
+
+                <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu navigasi" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Navigasi mobile">
+                <a href="#hero" onclick="closeMobileNav()">Beranda</a>
+                <a href="#menu" onclick="closeMobileNav()">Menu Hari Ini</a>
+                <a href="#gizi" onclick="closeMobileNav()">Nilai Gizi</a>
+                <a href="#riwayat" onclick="closeMobileNav()">Riwayat Menu</a>
+                <a href="#tentang" onclick="closeMobileNav()">Tentang Program</a>
+                <a href="#footer" onclick="closeMobileNav()">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+    <section id="hero" aria-labelledby="hero-title">
+        <div class="container hero-content">
+            <div class="hero-grid">
+                <!-- Left: text -->
+                <div>
+                    <div class="section-label reveal">MAKAN BERGIZI GRATIS</div>
+                    <h1 class="hero-title reveal reveal-delay-1" id="hero-title">
+                        Gizi Baik,<br />
+                        Masa Depan <span style="color:var(--accent);">Cerah</span>
+                    </h1>
+
+                    <p class="hero-tagline reveal reveal-delay-2">
+                        Menghadirkan makanan bergizi, seimbang, dan aman untuk
+                        mewujuadkan Indonesia emas tahun 2045.
+                    </p>
+
+                    <div class="hero-cta reveal reveal-delay-3">
+                        <a href="#menu" class="btn btn-primary" id="heroMenuBtn">
+                            Lihat Menu Hari Ini
+                        </a>
+                    </div>
+
+
+                </div>
+
+                <!-- Right: photo -->
+                <div class="hero-visual reveal reveal-delay-3">
+                    <div class="hero-img-wrapper"
+                        style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; box-shadow:0 20px 40px rgba(15, 42, 82, 0.1);">
+                        <img src="images/kids.png" alt="Foto anak-anak program Makan Bergizi Gratis (MBG)"
+                            loading="lazy"
+                            onerror="this.src='https://placehold.co/600x450/0F2A52/F5B301?text=Program+MBG'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     MENU HARI INI
+     ============================================================ -->
+    <section id="menu" aria-labelledby="menu-title" style="background: var(--bg-white);">
+        <div class="container">
+            <div class="reveal text-center" style="text-align: center;">
+                <div class="section-label">HARI INI</div>
+                <h2 class="section-title" id="menu-title">Menu Makanan & Gizi</h2>
+                <p class="section-subtitle" id="menuDateSubtitle" style="margin-bottom:3rem;">Memuat data menu…</p>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto;">
+                <!-- Daftar menu -->
+                <div class="menu-list-section">
+                    <div class="menu-list-header reveal reveal-delay-1"
+                        style="margin-bottom:1.5rem; text-align: center;">
+                        <h3 style="font-size:1.4rem; color:var(--primary-dark); margin-bottom:0.25rem;">Komposisi Menu
+                        </h3>
+                        <p style="font-size:0.95rem; color:var(--text-muted);">Disiapkan oleh Tim Dapur SPPG Kamulan 2
+                        </p>
+                    </div>
+                    <ul id="menuItemList" aria-label="Daftar item menu hari ini"
+                        style="display:flex; flex-direction:column; gap:0.75rem;">
+                        <!-- Diisi oleh JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     NILAI GIZI
+     ============================================================ -->
+    <section id="gizi" aria-labelledby="gizi-title" style="background: var(--bg-pale); padding: 4rem 0;">
+        <div class="container">
+            <div class="reveal text-center" style="text-align:center; max-width:600px; margin:0 auto 3rem auto;">
+                <div class="section-label">TRANSPARANSI KESEHATAN</div>
+                <h2 class="section-title" id="gizi-title">Kandungan Nilai Gizi</h2>
+                <p class="section-subtitle" style="margin-bottom:1.5rem;">Kandungan gizi per porsi menu hari ini yang
+                    disesuaikan dengan kebutuhan kalori harian.</p>
+                <div class="gizi-public-tabs" role="tablist">
+                    <button class="gizi-public-tab active" role="tab" onclick="changePublicGiziTab('Besar')">Porsi
+                        Besar</button>
+                    <button class="gizi-public-tab" role="tab" onclick="changePublicGiziTab('Kecil')">Porsi
+                        Kecil</button>
+                    <button class="gizi-public-tab" role="tab" onclick="changePublicGiziTab('Balita')">Porsi
+                        Balita</button>
+                    <button class="gizi-public-tab" role="tab" onclick="changePublicGiziTab('Bumil')">Bumil &
+                        Busui</button>
+                </div>
+            </div>
+
+            <!-- Diisi oleh JavaScript (diubah sedikit bentuk kartunya via CSS nanti) -->
+            <div class="gizi-grid" id="giziGrid" role="list" aria-label="Kartu kandungan gizi"
+                style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:1.5rem;">
+
+            </div>
+
+            <div class="alergen-banner reveal" id="alergenBanner" role="alert" aria-live="polite"
+                style="margin-top:2rem; background:rgba(245, 179, 1, 0.1); border:1px solid rgba(245, 179, 1, 0.3); border-radius:var(--radius-xl); padding:1rem 1.5rem; display:flex; gap:1rem; align-items:center;">
+                <span class="alergen-icon" aria-hidden="true" style="font-size:1.5rem;">⚠️</span>
+                <div>
+                    <strong style="color:var(--primary-dark);">Info Alergen:</strong>
+                    <span id="alergenText" style="color:var(--text-main);">Memuat informasi alergen…</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ============================================================
+     RIWAYAT MENU
+     ============================================================ -->
+    <section id="riwayat" aria-labelledby="riwayat-title" style="background: var(--bg-pale); padding: 5rem 0;">
+        <div class="container">
+            <div class="reveal text-center" style="text-align:center; margin-bottom:3rem;">
+                <div class="section-label">ARSIP PROGRAM</div>
+                <h2 class="section-title" id="riwayat-title">Riwayat Menu 7 Hari</h2>
+                <p class="section-subtitle">Catatan historis menu program MBG.</p>
+            </div>
+
+            <div class="riwayat-grid reveal" id="riwayatGrid" role="list" aria-label="Riwayat menu 7 hari">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+
+            <div class="riwayat-detail" id="riwayatDetail" role="region" aria-live="polite"
+                aria-label="Detail riwayat menu">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+    <section style="padding:4rem 1rem;">
+        <div class="container reveal"
+            style="background:var(--primary-light); border-radius:var(--radius-2xl); padding:4rem 2rem; text-align:center; color:white; box-shadow:0 20px 40px rgba(47, 128, 237, 0.2);">
+            <h2 style="font-size:2.2rem; font-weight:800; margin-bottom:1rem; font-family:'Poppins',sans-serif;">Pantau
+                Menu & Gizi Anak Setiap Hari</h2>
+            <p
+                style="font-size:1.1rem; opacity:0.9; margin-bottom:2rem; max-width:600px; margin-left:auto; margin-right:auto;">
+                Mari dukung program Makan Bergizi Gratis untuk mewujudkan generasi emas Indonesia yang sehat dan cerdas.
+            </p>
+            <a href="#menu" class="btn btn-primary"
+                style="background:var(--accent); color:var(--primary-dark); font-size:1rem; padding:1rem 2.5rem;">Lihat
+                Menu Hari Ini</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer id="footer" role="contentinfo"
+        style="background:var(--primary-dark); color:rgba(255,255,255,0.8); padding:5rem 0 2rem 0;">
+        <div class="container">
+            <div
+                style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:3rem; margin-bottom:4rem;">
+                <!-- Brand -->
+                <div>
+                    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
+                        <img src="images/LogoBGN.svg.webp" alt="Logo Badan Gizi Nasional"
+                            style="width: 40px; height: 40px; object-fit: contain; flex-shrink: 0;" />
+                        <div
+                            style="color:white; font-family:'Poppins',sans-serif; font-weight:700; font-size:1.1rem; line-height:1.2;">
+                            SPPG Blitar Talun<br>Kamulan 2</div>
+                    </div>
+                    <p style="font-size:0.9rem; margin-bottom:1.5rem; line-height:1.6;">Satuan Pelayanan Pemenuhan Gizi
+                        yang berkomitmen menyajikan makanan bergizi, sehat, dan terjangkau.</p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <span
+                            style="background:rgba(255,255,255,0.1); color:white; padding:0.3rem 0.7rem; border-radius:999px; font-size:0.75rem; font-weight:600;">Badan
+                            Gizi Nasional</span>
+                    </div>
+                </div>
+
+                <!-- Tautan -->
+                <div>
+                    <h3 style="color:white; font-family:'Poppins',sans-serif; font-size:1.1rem; margin-bottom:1.5rem;">
+                        Tautan Cepat</h3>
+                    <ul style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem;">
+                        <li><a href="#hero" style="color:inherit;">Beranda</a></li>
+                        <li><a href="#menu" style="color:inherit;">Menu Hari Ini</a></li>
+                        <li><a href="#gizi" style="color:inherit;">Kandungan Gizi</a></li>
+                        <li><a href="#riwayat" style="color:inherit;">Riwayat Menu</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kontak -->
+                <div>
+                    <h3 style="color:white; font-family:'Poppins',sans-serif; font-size:1.1rem; margin-bottom:1.5rem;">
+                        Kontak Kami</h3>
+                    <ul style="display:flex; flex-direction:column; gap:1rem; font-size:0.95rem;">
+                        <li style="display:flex; gap:0.75rem;"><span>📍</span><span>Jl. Kelud No. 2-20, Kel. Kamulan
+                                Kec. Talun Kab. Blitar</span></li>
+                        <li style="display:flex; gap:0.75rem;"><span>📞</span><span>+62 851 8499 3913 (Nasrul) <br> +62
+                                822 9852 2303 (Winda)</span></li>
+                        <li style="display:flex; gap:0.75rem;"><span>✉️</span><span>sppgkamulanbaru@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div
+                style="border-top:1px solid rgba(255,255,255,0.1); padding-top:2rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; font-size:0.85rem;">
+                <div>© <span id="footerYear"></span> SPPG Blitar Talun Kamulan 2. Hak cipta dilindungi.</div>
+                <div>Dikelola oleh Tim SPPG · Didukung Badan Gizi Nasional</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+    <script>
+        // ============================================================
+        // UTILITIES
+        // ============================================================
+
+        const HARI_ID = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const BULAN_ID = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        function formatTanggalIndonesia(dateStr) {
+            const d = dateStr ? new Date(dateStr + 'T00:00:00') : new Date();
+            return `${HARI_ID[d.getDay()]}, ${d.getDate()} ${BULAN_ID[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
+        function formatTglPendek(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.getDate();
+        }
+
+        function formatBlnPendek(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return BULAN_ID[d.getMonth()].substring(0, 3);
+        }
+
+        function getBadgeClass(kategori) {
+            const map = {
+                'Bahan Pokok': 'badge--karbo',
+                'Karbohidrat': 'badge--karbo', // fallback
+                'Lauk Hewani': 'badge--protein',
+                'Protein Hewani': 'badge--protein', // fallback
+                'Lauk Nabati': 'badge--protein',
+                'Protein Nabati': 'badge--protein', // fallback
+                'Sayuran': 'badge--sayuran',
+                'Buah Buahan': 'badge--buah',
+                'Buah': 'badge--buah', // fallback
+                'Minuman': 'badge--minuman',
+            };
+            return map[kategori] || 'badge--karbo';
+        }
+
+        // ============================================================
+        // RENDER: HERO DATE
+        // ============================================================
+        function renderHeroDate(data) {
+            const display = document.getElementById('heroDateDisplay');
+            if (display) {
+                const tanggal = data?.tanggal || '';
+                display.textContent = formatTanggalIndonesia(tanggal || null);
+            }
+        }
+
+        // ============================================================
+        // RENDER: MENU HARI INI
+        // ============================================================
+        function renderMenuHariIni(data) {
+            if (!data) {
+                document.getElementById('menuDateSubtitle').textContent = 'Menu hari ini belum tersedia.';
+                document.getElementById('menuItemList').innerHTML = '<li style="color:var(--text-muted);padding:1rem;">Data belum tersedia.</li>';
+                return;
+            }
+            // Subtitle date
+            document.getElementById('menuDateSubtitle').textContent =
+                'Disajikan pada ' + formatTanggalIndonesia(data.tanggal || null);
+
+            // Photo label
+            const label = document.getElementById('menuPhotoLabel');
+            if (label) {
+                const namaMenu = (data.menu || []).map(m => m.nama).join(' · ');
+                label.textContent = namaMenu;
+            }
+
+            // Item list
+            const list = document.getElementById('menuItemList');
+            list.innerHTML = (data.menu || []).map((item, i) => `
+    <li class="menu-item-card reveal reveal-delay-${Math.min(i + 1, 6)}" role="listitem">
+      <div class="menu-item-emoji" aria-hidden="true">${item.ikon}</div>
+      <div class="menu-item-info">
+        <div class="menu-item-name">${item.nama}</div>
+        <span class="badge ${getBadgeClass(item.kategori)}" aria-label="Kategori: ${item.kategori}">${item.kategori}</span>
+      </div>
+    </li>
+  `).join('');
+        }
+
+        // ============================================================
+        // RENDER: NILAI GIZI
+        // ============================================================
+
+        const giziConfig = [
+            { key: 'energi', label: 'Energi', ikon: '⚡', colorClass: 'gizi-icon-ring--energi', pct: 65 },
+            { key: 'protein', label: 'Protein', ikon: '💪', colorClass: 'gizi-icon-ring--protein', pct: 44 },
+            { key: 'karbohidrat', label: 'Karbohidrat', ikon: '🌾', colorClass: 'gizi-icon-ring--karbohidrat', pct: 28 },
+            { key: 'lemak', label: 'Lemak', ikon: '🥑', colorClass: 'gizi-icon-ring--lemak', pct: 25 },
+            { key: 'serat', label: 'Serat', ikon: '🥦', colorClass: 'gizi-icon-ring--serat', pct: 16 },
+        ];
+
+        let currentGiziData = {};
+        let giziRenderedCount = 0;
+
+        function changePublicGiziTab(porsi) {
+            document.querySelectorAll('.gizi-public-tab').forEach(btn => {
+                if (btn.textContent.includes(porsi) || (porsi === 'Bumil' && btn.textContent.includes('Bumil'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderGiziGrid(porsi);
+        }
+
+        function renderGiziGrid(porsi = 'Besar') {
+            const grid = document.getElementById('giziGrid');
+            const g = currentGiziData[porsi] || {};
+
+            // If it is not the first render, make the cards visible immediately
+            const makeVisible = giziRenderedCount > 0;
+
+            grid.innerHTML = giziConfig.map((cfg, i) => {
+                const item = g[cfg.key];
+                if (!item) return '';
+                return `
+      <div class="gizi-card reveal reveal-delay-${i + 1} ${makeVisible ? 'visible' : ''}" role="listitem"
+           aria-label="${cfg.label}: ${item.nilai} ${item.satuan}">
+        <div class="gizi-icon-ring ${cfg.colorClass}" aria-hidden="true">${cfg.ikon}</div>
+        <div class="gizi-nilai">
+          <span class="counter" data-target="${item.nilai}">0</span>
+          <span class="gizi-satuan">${item.satuan}</span>
+        </div>
+        <div class="gizi-label">${cfg.label}</div>
+        <div class="gizi-bar-wrap" role="progressbar" aria-valuenow="${cfg.pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${cfg.pct}% dari kebutuhan harian">
+          <div class="gizi-bar-fill" style="width:0%" data-width="${cfg.pct}%"></div>
+        </div>
+      </div>
+    `;
+            }).join('');
+
+            giziRenderedCount++;
+
+            // Re-init counters for new values
+            document.querySelectorAll('.counter').forEach(el => animateCounter(el));
+
+            // Re-init bars
+            setTimeout(() => {
+                document.querySelectorAll('.gizi-bar-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 100);
+        }
+
+        function renderGizi(data) {
+            currentGiziData = data?.gizi || {};
+            // Default to 'Besar'
+            changePublicGiziTab('Besar');
+
+            // Alergen
+            const banner = document.getElementById('alergenBanner');
+            if (banner) {
+                if (data?.alergen && data.alergen.trim()) {
+                    document.getElementById('alergenText').textContent = ' ' + data.alergen;
+                    banner.style.display = 'flex';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+        }
+
+        // ============================================================
+        // RENDER: RIWAYAT MENU
+        // ============================================================
+
+        let activeRiwayat = null;
+
+        let _riwayatData = [];
+
+        function renderRiwayat(riwayat) {
+            // Sort by date ascending (oldest first)
+            _riwayatData = (riwayat || []).slice().sort((a, b) => a.tanggal.localeCompare(b.tanggal));
+            const grid = document.getElementById('riwayatGrid');
+            const today = new Date().toISOString().split('T')[0];
+
+            if (!_riwayatData.length) {
+                grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-muted);">Belum ada riwayat menu.</div>';
+                return;
+            }
+
+            grid.innerHTML = _riwayatData.map((r, i) => {
+                const isToday = r.tanggal === today || (i === _riwayatData.length - 1 && !_riwayatData.some(x => x.tanggal === today));
+                return `
+      <div class="riwayat-card ${isToday ? 'today' : ''} reveal reveal-delay-${Math.min(i + 1, 7)}"
+           role="listitem"
+           tabindex="0"
+           aria-label="${r.hari}, ${formatTglPendek(r.tanggal)} – ${r.menu}"
+           onclick="showRiwayatDetail(${i})"
+           onkeypress="if(event.key==='Enter') showRiwayatDetail(${i})"
+           id="riwayat-card-${i}">
+        ${isToday ? '<span class="today-badge">Hari Ini</span>' : ''}
+        <div class="riwayat-emoji" aria-hidden="true">${r.emoji}</div>
+        <div class="riwayat-hari">${r.hari}</div>
+        <div class="riwayat-tgl">${formatTglPendek(r.tanggal)}</div>
+        <div class="riwayat-bln">${formatBlnPendek(r.tanggal)}</div>
+      </div>
+    `;
+            }).join('');
+        }
+
+        function showRiwayatDetail(index) {
+            const detail = document.getElementById('riwayatDetail');
+            const r = _riwayatData[index];
+
+            // Toggle
+            if (activeRiwayat === index) {
+                detail.classList.remove('visible');
+                activeRiwayat = null;
+                document.querySelectorAll('.riwayat-card').forEach(c => c.classList.remove('active'));
+                return;
+            }
+
+            activeRiwayat = index;
+            document.querySelectorAll('.riwayat-card').forEach(c => c.classList.remove('active'));
+            document.getElementById(`riwayat-card-${index}`)?.classList.add('active');
+
+            detail.innerHTML = `
+    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <span style="font-size:2.5rem;">${r.emoji}</span>
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; font-weight:700;">${r.hari}, ${formatTanggalIndonesia(r.tanggal)}</div>
+        <div class="riwayat-detail-menu">${r.menu}</div>
+      </div>
+    </div>
+  `;
+            detail.classList.add('visible');
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // ============================================================
+        // RENDER: STATISTIK
+        // ============================================================
+
+        function renderStatistik(statistik) {
+            const grid = document.getElementById('statsGrid');
+            if (!grid) return;
+            if (!statistik || !statistik.length) return;
+            grid.innerHTML = statistik.map((s, i) => `
+    <div class="stat-card reveal reveal-delay-${i + 1}"
+         aria-label="${s.label}: ${s.nilai} ${s.satuan}">
+      <div class="stat-emoji" aria-hidden="true">${s.ikon}</div>
+      <div class="stat-value">
+        <span class="counter" data-target="${s.nilai}">0</span>
+        <span class="stat-plus" aria-hidden="true">+</span>
+      </div>
+      <div class="stat-label">${s.label}</div>
+    </div>
+  `).join('');
+        }
+
+        // ============================================================
+        // SCROLL REVEAL OBSERVER
+        // ============================================================
+
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Animate gizi bars
+                        const bar = entry.target.querySelector('.gizi-bar-fill');
+                        if (bar) {
+                            setTimeout(() => { bar.style.width = bar.dataset.width; }, 100);
+                        }
+                        // Animate counters
+                        const counter = entry.target.querySelector('.counter');
+                        if (counter) {
+                            animateCounter(counter);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            // Observe all gizi bars (parent card)
+            document.querySelectorAll('.gizi-card').forEach(el => observer.observe(el));
+            // Observe all stat cards
+            document.querySelectorAll('.stat-card').forEach(el => observer.observe(el));
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // ============================================================
+        // COUNTER ANIMATION
+        // ============================================================
+
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target, 10);
+            const duration = 1800;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(ease * target).toLocaleString('id-ID');
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // ============================================================
+        // NAVBAR: SCROLL SPY + MOBILE TOGGLE
+        // ============================================================
+
+        function initNavbar() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileNav = document.getElementById('mobileNav');
+
+            hamburger.addEventListener('click', () => {
+                const isOpen = hamburger.classList.toggle('open');
+                mobileNav.classList.toggle('open');
+                hamburger.setAttribute('aria-expanded', isOpen);
+            });
+
+            // Scroll spy
+            const sections = ['hero', 'menu', 'gizi', 'riwayat', 'tentang', 'footer'];
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            const spyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach(a => {
+                            a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) spyObserver.observe(el);
+            });
+        }
+
+        window.closeMobileNav = function () {
+            document.getElementById('hamburgerBtn').classList.remove('open');
+            document.getElementById('mobileNav').classList.remove('open');
+            document.getElementById('hamburgerBtn').setAttribute('aria-expanded', false);
+        };
+
+        // ============================================================
+        // FOOTER YEAR
+        // ============================================================
+
+        function setFooterYear() {
+            const el = document.getElementById('footerYear');
+            if (el) el.textContent = new Date().getFullYear();
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            setFooterYear();
+            initNavbar();
+
+            // Fetch semua data dari API secara paralel
+            const [menuData, riwayatData, statistikData] = await Promise.all([
+                fetchMenuHariIni(),
+                fetchRiwayat(),
+                fetchStatistik(),
+            ]);
+
+            // Render dengan data API
+            renderHeroDate(menuData);
+            renderMenuHariIni(menuData);
+            renderGizi(menuData);
+            renderRiwayat(riwayatData);
+            renderStatistik(statistikData);
+
+            requestAnimationFrame(() => initScrollReveal());
+        });
+
+        // ============================================================
+        // API DATA FETCHING (replaces static data.js)
+        // ============================================================
+
+        async function fetchMenuHariIni() {
+            try {
+                const res = await fetch('/api/menu/today');
+                if (!res.ok) return null;
+                return await res.json();
+            } catch { return null; }
+        }
+
+        async function fetchRiwayat() {
+            try {
+                const res = await fetch('/api/menu/history');
+                if (!res.ok) return [];
+                return await res.json();
+            } catch { return []; }
+        }
+
+        async function fetchStatistik() {
+            try {
+                const res = await fetch('/api/statistik');
+                if (!res.ok) return [];
+                return await res.json();
+            } catch { return []; }
+        }
+
+    </script>
+
+</body>
+
+</html>

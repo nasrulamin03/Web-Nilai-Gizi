@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Admin — SPPG Kamulan 2</title>
+  <link rel="icon" type="image/webp" href="/images/LogoBGN.svg.webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0B3C74;
+      --primary-dark: #062550;
+      --accent: #4FC3F7;
+      --bg: #EAF6FD;
+      --text: #1B2A41;
+      --muted: #5A7080;
+      --danger: #e53935;
+    }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #1A6FC4 100%);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .login-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      animation: slideUp 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(30px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .login-header { text-align: center; margin-bottom: 2rem; }
+    .logo-circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #0288D1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 900; color: white;
+      font-family: 'Poppins', sans-serif;
+      margin: 0 auto 1rem;
+      box-shadow: 0 6px 20px rgba(79,195,247,0.4);
+    }
+    .login-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      color: var(--primary); margin-bottom: 0.25rem;
+    }
+    .login-sub { font-size: 0.82rem; color: var(--muted); }
+    .form-group { margin-bottom: 1.25rem; }
+    label {
+      display: block;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--text); margin-bottom: 0.4rem;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .input-wrap { position: relative; }
+    input[type="password"] {
+      width: 100%;
+      padding: 0.85rem 3rem 0.85rem 1rem;
+      border: 2px solid #e0e8f0;
+      border-radius: 0.9rem;
+      font-size: 1rem;
+      font-family: 'Nunito Sans', sans-serif;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="password"]:focus { border-color: var(--accent); }
+    .eye-btn {
+      position: absolute; right: 0.9rem; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      font-size: 1.1rem; color: var(--muted);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(135deg, var(--accent), #0288D1);
+      color: white;
+      border: none; border-radius: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(79,195,247,0.35);
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(79,195,247,0.45); }
+    .btn-login:active { transform: translateY(0); }
+    .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .error-msg {
+      display: none;
+      background: #fff0f0;
+      border: 1.5px solid #ffcdd2;
+      color: var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .error-msg.show { display: flex; align-items: center; gap: 0.5rem; }
+    .footer-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-note a { color: var(--primary); font-weight: 700; }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .btn-login.loading .spinner { display: block; }
+    .btn-login.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo-circle">K2</div>
+      <div class="login-title">SPPG Kamulan 2</div>
+      <div class="login-sub">Panel Admin — Nilai Gizi MBG</div>
+    </div>
+
+    <div class="error-msg" id="errorMsg" role="alert">
+      <span>⚠️</span>
+      <span id="errorText">Password salah. Coba lagi.</span>
+    </div>
+
+    <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+      <div class="form-group">
+        <label for="password">🔑 Password Admin</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="Masukkan password…" autocomplete="current-password" required/>
+          <button type="button" class="eye-btn" onclick="togglePw()" aria-label="Tampilkan/sembunyikan password">👁️</button>
+        </div>
+      </div>
+      <button type="submit" class="btn-login" id="loginBtn">
+        <div class="spinner"></div>
+        <span class="btn-text">🔓 Masuk ke Admin Panel</span>
+      </button>
+    </form>
+
+    <div class="footer-note">
+      <a href="/">← Kembali ke Website Publik</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePw() {
+      const inp = document.getElementById('password');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+
+    async function doLogin(e) {
+      e.preventDefault();
+      const pw  = document.getElementById('password').value;
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('errorMsg');
+      err.classList.remove('show');
+      btn.classList.add('loading');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          window.location.href = '/admin';
+        } else {
+          document.getElementById('errorText').textContent = data.error || 'Password salah.';
+          err.classList.add('show');
+          document.getElementById('password').value = '';
+          document.getElementById('password').focus();
+        }
+      } catch {
+        document.getElementById('errorText').textContent = 'Gagal terhubung ke server.';
+        err.classList.add('show');
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // Fokus otomatis ke field password
+    document.getElementById('password').focus();
+  </script>
+</body>
+</html>
